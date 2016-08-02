@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+             xmlns:local="clr-namespace:Poz1.ImageGallery;assembly=Poz1.ImageGallery"
+             x:Class="Poz1.ImageGallery.MainPage"
+             Title="{Binding Title}">
+
+            <Grid RowSpacing="0">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="38*"/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="55*"/>
+              </Grid.RowDefinitions>
+              
+              <cv:CarouselView Grid.RowSpan="2" ItemsSource="{Binding PhotoList}">
+                <cv:CarouselView.ItemTemplate>
+                  <DataTemplate>
+                    <Grid>
+                      <Image Aspect="AspectFill" Source="{Binding .}"/>
+                    </Grid>
+                  </DataTemplate>
+                </cv:CarouselView.ItemTemplate>
+                
+                <cv:CarouselView.Behaviors>
+                  <local:CarouselViewBehavior Command="{Binding CurrentPhotoChangedCommand}"/>
+                </cv:CarouselView.Behaviors>
+              </cv:CarouselView>
+              
+              <StackLayout Grid.Row="1" WidthRequest="80" HorizontalOptions="EndAndExpand" BackgroundColor="#FFF" Orientation="Horizontal">
+                <Label  Text="{Binding CurrentPhoto}" TextColor="Black" FontSize="18" HorizontalOptions="Center" Margin="20,0,0,0" VerticalOptions="CenterAndExpand"/>
+                <Label  Text="{Binding PhotoList.Count, StringFormat='/{0}'}" TextColor="Black" FontSize="18" Margin="-5,0,0,0" VerticalOptions="CenterAndExpand"/>
+              </StackLayout>
+              
+              <ScrollView Grid.Row="2" BackgroundColor="#F4F4F4" Padding="12">
+                <Label Text="{Binding Text}" TextColor="Black" FontSize="16" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
+              </ScrollView>
+              
+            </Grid>
+</ContentPage>
